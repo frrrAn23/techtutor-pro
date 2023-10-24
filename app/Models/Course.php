@@ -18,6 +18,7 @@ class Course extends Model
         'name',
         'description',
         'price',
+        'retail_price',
         'author_id',
         'thumbnail_url',
         'status',
@@ -26,6 +27,7 @@ class Course extends Model
         'course_category_id',
         'labels',
         'type',
+        'summary',
     ];
 
     protected $casts = [

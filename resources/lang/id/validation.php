@@ -13,4 +13,7 @@ return [
     'unique' => ':attribute sudah ada yang menggunakan.',
     'confirmed' => 'Konfirmasi :attribute tidak cocok.',
     'regex' => 'Format :attribute tidak sesuai.',
+    'image' => 'Kolom :attribute harus berisi file gambar.',
+    'mimes' => 'Kolom :attribute harus berisi file dengan tipe: :values.',
+    'numeric' => 'Kolom :attribute harus berisi angka.',
 ];

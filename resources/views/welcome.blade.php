@@ -67,7 +67,7 @@
                         @endguest
 
                         @auth
-                            <a href="{{ route('home') }}" class="btn btn-success w-xs">Dashboard</a>
+                            <a href="{{ route('dashboard.index') }}" class="btn btn-success w-xs">Dashboard</a>
                         @endauth
                     </div>
                 </div>
@@ -101,76 +101,6 @@
             <!-- end container -->
         </section>
         <!-- hero section end -->
-
-        <!-- currency price section start -->
-        <section class="section bg-white p-0">
-            <div class="container">
-                <div class="currency-price">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="d-flex">
-                                        <div class="flex-shrink-0 me-3">
-                                            <div class="avatar-xs">
-                                                <span class="avatar-title rounded-circle bg-warning bg-soft text-warning font-size-18">
-                                                    <i class="mdi mdi-bitcoin"></i>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <div class="flex-grow-1">
-                                            <p class="text-muted">XXX</p>
-                                            <p class="text-muted mb-0">Lorem ipsum bla blabla bla Lorem ipsum bla blabla bla Lorem ipsum bla blabla bla Lorem ipsum bla blabla bla</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="d-flex">
-                                        <div class="flex-shrink-0 me-3">
-                                            <div class="avatar-xs">
-                                                <span class="avatar-title rounded-circle bg-primary bg-soft text-primary font-size-18">
-                                                    <i class="mdi mdi-ethereum"></i>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <div class="flex-grow-1">
-                                            <p class="text-muted">YYY</p>
-                                            <p class="text-muted mb-0">Lorem ipsum bla blabla bla Lorem ipsum bla blabla bla Lorem ipsum bla blabla bla Lorem ipsum bla blabla bla</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="d-flex">
-                                        <div class="flex-shrink-0 me-3">
-                                            <div class="avatar-xs">
-                                                <span class="avatar-title rounded-circle bg-info bg-soft text-info font-size-18">
-                                                    <i class="mdi mdi-litecoin"></i>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <div class="flex-grow-1">
-                                            <p class="text-muted">ZZZ</p>
-                                            <p class="text-muted mb-0">Lorem ipsum bla blabla bla Lorem ipsum bla blabla bla Lorem ipsum bla blabla bla Lorem ipsum bla blabla bla</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- end row -->
-                </div>
-            </div>
-            <!-- end container -->
-        </section>
-        <!-- currency price section end -->
 
         <!-- about section start -->
         <section class="section pt-4 bg-white" id="about">

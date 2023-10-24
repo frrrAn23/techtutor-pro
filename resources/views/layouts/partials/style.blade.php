@@ -8,6 +8,9 @@
 
 <link rel="shortcut icon" href="{{ asset('images/logo-techtutor-pro-only.jpg') }}">
 
+<!-- Toastr -->
+<link rel="stylesheet" type="text/css" href="{{ asset('libs/toastr/build/toastr.min.css') }}">
+
 <!-- Sweet Alert-->
 <link href="{{ asset('libs/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css" />
 

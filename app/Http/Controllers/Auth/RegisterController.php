@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Enums\RoleEnum;
+use App\Enums\UserStatusEnum;
 use App\Http\Controllers\Controller;
 use App\Models\Role;
 use App\Providers\RouteServiceProvider;
@@ -66,7 +68,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $role = Role::where('name', 'student')->first();
+        $role = Role::where('name', RoleEnum::STUDENT)->first();
 
         return User::create([
             'name' => $data['name'],
@@ -75,7 +77,7 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
             'role_id' => $role->id,
             'avatar_url' => 'https://ui-avatars.com/api/?name=' . $data['name'] . '&color=7F9CF5&background=EBF4FF',
-            'status' => 'unverified'
+            'status' => UserStatusEnum::UNVERIFIED
         ]);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Enums\RoleEnum;
 use App\Models\Role;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -15,13 +16,13 @@ class RoleSeeder extends Seeder
     {
         $payload = [
             [
-                'name' => 'student',
+                'name' => RoleEnum::STUDENT,
             ],
             [
-                'name' => 'admin',
+                'name' => RoleEnum::INSTRUCTOR,
             ],
             [
-                'name' => 'instructor',
+                'name' => RoleEnum::ADMIN,
             ],
         ];
 

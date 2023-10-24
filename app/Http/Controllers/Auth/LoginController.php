@@ -67,7 +67,7 @@ class LoginController extends Controller
             }
 
             Auth::attempt($credentials, $remember);
-            return redirect()->route('home');
+            return redirect()->route('dashboard.index');
         }
 
         return redirect()->route('login')->with('error', 'Email atau password salah.');
