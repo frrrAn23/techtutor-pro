@@ -25,6 +25,7 @@ class Material extends Model
         'type',
         'duration_in_minutes',
         'order',
+        'slug'
     ];
 
     public function course()

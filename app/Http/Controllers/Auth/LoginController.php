@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Enums\UserStatusEnum;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User;
@@ -60,9 +61,7 @@ class LoginController extends Controller
         $user = User::where('email', $request->email)->first();
 
         if ($user && Hash::check($request->password, $user->password)) {
-            if ($user->status == 'unverified') {
-                return redirect()->route('login')->with('error', 'Anda belum melakukan verifikasi akun');
-            } elseif ($user->status == 'suspended') {
+            if ($user->status == 'suspended') {
                 return redirect()->route('login')->with('error', 'Akun anda sedang di suspend');
             }
 

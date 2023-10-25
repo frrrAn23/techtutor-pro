@@ -266,13 +266,17 @@
 
 
     setInterval(() => {
-        var listboxElement = document.querySelector('[role="listbox"]');
-        var dialogWrap = document.querySelector('.tox-dialog-wrap');
+        var elementWithPythonTitle = document.querySelector('[title="Python"]');
 
-        if (listboxElement) {
-            dialogWrap.classList.add('d-none');
-        } else {
-            dialogWrap.classList.remove('d-none');
+        if (elementWithPythonTitle) {
+            var listboxElement = document.querySelector('[role="listbox"]');
+            var dialogWrap = document.querySelector('.tox-dialog-wrap');
+
+            if (listboxElement) {
+                dialogWrap.classList.add('d-none');
+            } else {
+                dialogWrap.classList.remove('d-none');
+            }
         }
     }, 1000);
 </script>

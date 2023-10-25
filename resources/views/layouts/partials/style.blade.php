@@ -4,7 +4,7 @@
 <!-- CSRF Token -->
 <meta name="csrf-token" content="{{ csrf_token() }}">
 
-<title>TechTutor Pro | . ($pageTitle ?? '')</title>
+<title>TechTutor Pro | . ({{ $pageTitle ?? '' }})</title>
 
 <link rel="shortcut icon" href="{{ asset('images/logo-techtutor-pro-only.jpg') }}">
 

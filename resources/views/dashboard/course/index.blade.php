@@ -51,11 +51,11 @@
                             <td>
                                 @if ($course->retail_price != 0)
                                     <span class="text-muted me-2">
-                                        <del>{{ number_format($course->retail_price, 0, ',', '.') }}</del>
+                                        <del>{{ number_format($course->price, 0, ',', '.') }}</del>
                                     </span>
                                 @endif
 
-                                {{ number_format($course->price, 0, ',', '.') }}
+                                {{ number_format($course->retail_price, 0, ',', '.') }}
                             </td>
                             <td>{{ $course->type }}</td>
                             <td>

@@ -81,7 +81,7 @@
                             <div class="mb-3">
                                 <label for="thumbnail" class="form-label">Thumbnail</label>
                                 <small class="text-muted">(Opsional)</small>
-                                <img class="d-block mt-1 mb-1" src="{{ getFile($course->thumbnail, asset('images/default-profile.jpg')) }}" height="100">
+                                <img class="d-block mt-1 mb-1" src="{{ getFile($course->thumbnail_url, asset('images/default-profile.jpg')) }}" height="100">
 
                                 <input class="form-control  @error('thumbnail') is-invalid @enderror" type="file" id="thumbnail" name="thumbnail">
 
@@ -270,13 +270,17 @@
 
 
     setInterval(() => {
-        var listboxElement = document.querySelector('[role="listbox"]');
-        var dialogWrap = document.querySelector('.tox-dialog-wrap');
+        var elementWithPythonTitle = document.querySelector('[title="Python"]');
 
-        if (listboxElement) {
-            dialogWrap.classList.add('d-none');
-        } else {
-            dialogWrap.classList.remove('d-none');
+        if (elementWithPythonTitle) {
+            var listboxElement = document.querySelector('[role="listbox"]');
+            var dialogWrap = document.querySelector('.tox-dialog-wrap');
+
+            if (listboxElement) {
+                dialogWrap.classList.add('d-none');
+            } else {
+                dialogWrap.classList.remove('d-none');
+            }
         }
     }, 1000);
 </script>

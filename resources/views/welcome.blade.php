@@ -68,6 +68,7 @@
 
                         @auth
                             <a href="{{ route('dashboard.index') }}" class="btn btn-success w-xs">Dashboard</a>
+                            <button onclick="logout()" class="btn btn-danger waves-effect waves-light w-xs">Logout</button>
                         @endauth
                     </div>
                 </div>
@@ -190,193 +191,6 @@
             <!-- end container -->
         </section>
         <!-- Features end -->
-
-        <!-- Team start -->
-        <section class="section" id="team">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="text-center mb-5">
-                            <div class="small-title">Tim</div>
-                            <h4>5 Anggota Tim Kami</h4>
-                        </div>
-                    </div>
-                </div>
-                <!-- end row -->
-
-                <div class="col-lg-12">
-                    <div class="owl-carousel owl-theme events navs-carousel" id="team-carousel" dir="ltr">
-                        <div class="item">
-                            <div class="card text-center team-box">
-                                <div class="card-body">
-                                    <div>
-                                        <img src="{{ asset('images/users/avatar-2.jpg') }}" alt="" class="rounded">
-                                    </div>
-
-                                    <div class="mt-3">
-                                        <h5>M Zidane Sc</h5>
-                                        <P class="text-muted mb-0">CEO</P>
-                                    </div>
-                                </div>
-                                <div class="card-footer bg-transparent border-top">
-                                    <div class="d-flex mb-0 team-social-links">
-                                        <div class="flex-fill">
-                                            <a href="javascript: void(0);" data-bs-toggle="tooltip" data-bs-placement="top" title="Facebook">
-                                                <i class="mdi mdi-facebook"></i>
-                                            </a>
-                                        </div>
-                                        <div class="flex-fill">
-                                            <a href="javascript: void(0);" data-bs-toggle="tooltip" data-bs-placement="top" title="Linkedin">
-                                                <i class="mdi mdi-linkedin"></i>
-                                            </a>
-                                        </div>
-                                        <div class="flex-fill">
-                                            <a href="javascript: void(0);" data-bs-toggle="tooltip" data-bs-placement="top" title="Google">
-                                                <i class="mdi mdi-google"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="card text-center team-box">
-                                <div class="card-body">
-                                    <div>
-                                        <img src="{{ asset('images/users/avatar-3.jpg') }}" alt="" class="rounded">
-                                    </div>
-
-                                    <div class="mt-3">
-                                        <h5>Chris Albertini</h5>
-                                        <P class="text-muted mb-0">Gelandang Tengah</P>
-                                    </div>
-                                </div>
-                                <div class="card-footer bg-transparent border-top">
-                                    <div class="d-flex mb-0 team-social-links">
-                                        <div class="flex-fill">
-                                            <a href="javascript: void(0);" data-bs-toggle="tooltip" data-bs-placement="top" title="Facebook">
-                                                <i class="mdi mdi-facebook"></i>
-                                            </a>
-                                        </div>
-                                        <div class="flex-fill">
-                                            <a href="javascript: void(0);" data-bs-toggle="tooltip" data-bs-placement="top" title="Linkedin">
-                                                <i class="mdi mdi-linkedin"></i>
-                                            </a>
-                                        </div>
-                                        <div class="flex-fill">
-                                            <a href="javascript: void(0);" data-bs-toggle="tooltip" data-bs-placement="top" title="Google">
-                                                <i class="mdi mdi-google"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="card text-center team-box">
-                                <div class="card-body">
-                                    <div>
-                                        <img src="{{ asset('images/users/avatar-8.jpg') }}" alt="" class="rounded">
-                                    </div>
-                                    <div class="mt-3">
-                                        <h5>Farhan Mullet</h5>
-                                        <P class="text-muted mb-0">Joki</P>
-                                    </div>
-                                </div>
-                                <div class="card-footer bg-transparent border-top">
-                                    <div class="d-flex mb-0 team-social-links">
-                                        <div class="flex-fill">
-                                            <a href="javascript: void(0);" data-bs-toggle="tooltip" data-bs-placement="top" title="Facebook">
-                                                <i class="mdi mdi-facebook"></i>
-                                            </a>
-                                        </div>
-                                        <div class="flex-fill">
-                                            <a href="javascript: void(0);" data-bs-toggle="tooltip" data-bs-placement="top" title="Linkedin">
-                                                <i class="mdi mdi-linkedin"></i>
-                                            </a>
-                                        </div>
-                                        <div class="flex-fill">
-                                            <a href="javascript: void(0);" data-bs-toggle="tooltip" data-bs-placement="top" title="Google">
-                                                <i class="mdi mdi-google"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="card text-center team-box">
-                                <div class="card-body">
-                                    <div>
-                                        <img src="{{ asset('images/users/avatar-5.jpg') }}" alt="" class="rounded">
-                                    </div>
-
-                                    <div class="mt-3">
-                                        <h5>Ara-ara</h5>
-                                        <P class="text-muted mb-0">Cosplayer</P>
-                                    </div>
-                                </div>
-                                <div class="card-footer bg-transparent border-top">
-                                    <div class="d-flex mb-0 team-social-links">
-                                        <div class="flex-fill">
-                                            <a href="javascript: void(0);" data-bs-toggle="tooltip" data-bs-placement="top" title="Facebook">
-                                                <i class="mdi mdi-facebook"></i>
-                                            </a>
-                                        </div>
-                                        <div class="flex-fill">
-                                            <a href="javascript: void(0);" data-bs-toggle="tooltip" data-bs-placement="top" title="Linkedin">
-                                                <i class="mdi mdi-linkedin"></i>
-                                            </a>
-                                        </div>
-                                        <div class="flex-fill">
-                                            <a href="javascript: void(0);" data-bs-toggle="tooltip" data-bs-placement="top" title="Google">
-                                                <i class="mdi mdi-google"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="card text-center team-box">
-                                <div class="card-body">
-                                    <div>
-                                        <img src="{{ asset('images/users/avatar-1.jpg') }}" alt="" class="rounded">
-                                    </div>
-
-                                    <div class="mt-3">
-                                        <h5>Ojann </h5>
-                                        <P class="text-muted mb-0">Tiktoker</P>
-                                    </div>
-                                </div>
-                                <div class="card-footer bg-transparent border-top">
-                                    <div class="d-flex mb-0 team-social-links">
-                                        <div class="flex-fill">
-                                            <a href="javascript: void(0);" data-bs-toggle="tooltip" data-bs-placement="top" title="Facebook">
-                                                <i class="mdi mdi-facebook"></i>
-                                            </a>
-                                        </div>
-                                        <div class="flex-fill">
-                                            <a href="javascript: void(0);" data-bs-toggle="tooltip" data-bs-placement="top" title="Linkedin">
-                                                <i class="mdi mdi-linkedin"></i>
-                                            </a>
-                                        </div>
-                                        <div class="flex-fill">
-                                            <a href="javascript: void(0);" data-bs-toggle="tooltip" data-bs-placement="top" title="Google">
-                                                <i class="mdi mdi-google"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- end row -->
-            </div>
-            <!-- end container -->
-        </section>
-        <!-- Team end -->
 
         <!-- Blog start -->
         <section class="section bg-white" id="news">
@@ -722,5 +536,30 @@
         <script src="{{ asset('js/pages/ico-landing.init.js') }}"></script>
 
         <script src="{{ asset('js/app.js') }}"></script>
+
+        <script>
+            function logout() {
+                $.ajax({
+                    type: 'POST',
+                    url: '/logout',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    data: {
+                        "_token": "{{ csrf_token() }}"
+                    },
+                    success: function (data) {
+                        location.reload();
+                    },
+                    error: function (data) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Logout Failed',
+                            text: 'An error occurred during the logout process.'
+                        });
+                    }
+                });
+            }
+        </script>
     </body>
 </html>

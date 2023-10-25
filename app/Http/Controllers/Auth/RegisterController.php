@@ -69,8 +69,7 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         $role = Role::where('name', RoleEnum::STUDENT)->first();
-
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'username' => $data['username'],
             'email' => $data['email'],
@@ -79,5 +78,9 @@ class RegisterController extends Controller
             'avatar_url' => 'https://ui-avatars.com/api/?name=' . $data['name'] . '&color=7F9CF5&background=EBF4FF',
             'status' => UserStatusEnum::UNVERIFIED
         ]);
+
+        $user->sendEmailVerificationNotification();
+
+        return $user;
     }
 }

@@ -73,9 +73,18 @@ class CourseController extends Controller
     public function show($id)
     {
         $course = Course::findOrFail($id);
+        $topics = $course->topics()->orderBy('order', 'asc')->get();
+
+        $durationInMinute = 0;
+        foreach ($topics as $topic) {
+            $durationInMinute += $topic->materials->sum('duration_in_minutes');
+        }
+
         $data['pageTitle'] = 'Detail Kursus';
         $data['course'] = $course;
         $data['course']->discount = $course->retail_price != 0 ? ($course->price - $course->retail_price) / $course->price * 100 : 0;
+        $data['topics'] = $topics;
+        $data['durationInMinute'] = $durationInMinute;
 
         return view('dashboard.course.show', $data);
     }

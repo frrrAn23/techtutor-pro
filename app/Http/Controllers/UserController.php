@@ -8,6 +8,7 @@ use App\Enums\UserStatusEnum;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
@@ -57,6 +58,8 @@ class UserController extends Controller
         $user->password = Hash::make($request->password);
         $user->status = UserStatusEnum::ACTIVE;
         $user->save();
+
+        $user->markEmailAsVerified();
 
         return redirect()->route('dashboard.admin.index')->with('success', 'Admin berhasil ditambahkan');
     }
@@ -174,6 +177,8 @@ class UserController extends Controller
         $user->last_education = $request->last_education;
         $user->save();
 
+        $user->markEmailAsVerified();
+
         return redirect()->route('dashboard.student.index')->with('success', 'Siswa berhasil ditambahkan');
     }
 
@@ -242,5 +247,29 @@ class UserController extends Controller
                 'message' => $th->getMessage(),
             ], 500);
         }
+    }
+
+    public function verifyEmail() {
+        if (Auth::user()->status == UserStatusEnum::ACTIVE) {
+            return redirect()->route('dashboard.index');
+        }
+
+        return view('auth.verify-email');
+    }
+
+    public function sendVerifyEmail(Request $request) {
+        $request->user()->sendEmailVerificationNotification();
+
+        return back()->with('success', 'Link verifikasi telah dikirim!');
+    }
+
+    public function verifyEmailToken(Request $request) {
+        $request->user()->markEmailAsVerified();
+
+        $request->user()->update([
+            'status' => UserStatusEnum::ACTIVE
+        ]);
+
+        return redirect()->route('dashboard.index')->with('success', 'Email berhasil diverifikasi');
     }
 }
