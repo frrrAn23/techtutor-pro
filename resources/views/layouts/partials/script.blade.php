@@ -12,6 +12,8 @@
 
 <script src="{{ asset('js/app.js') }}"></script>
 
+<script src="{{ asset('libs/prism/prism.js') }}"></script>
+
 <!-- Custom Script Global -->
 <script>
 // Logout function

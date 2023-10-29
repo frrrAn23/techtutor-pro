@@ -20,7 +20,12 @@ class UserAccessCourse extends Model
         'purchased_at',
         'completed_at',
         'last_material_id',
-        'status'
+        'status',
+        'payment_status',
+        'snap_token',
+        'course_price',
+        'course_retail_price',
+        'payment_amount',
     ];
 
     public function course()

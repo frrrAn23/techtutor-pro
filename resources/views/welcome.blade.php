@@ -22,6 +22,18 @@
         <!-- App Css-->
         <link href="{{ asset('css/app.min.css') }}" id="app-style" rel="stylesheet" type="text/css" />
 
+        <style>
+            .product-image {
+                height: 200px; /* Set a fixed height for the product images */
+                object-fit: cover; /* This property ensures the image covers the container */
+            }
+
+
+        .product-card {
+            height: 315px;
+        }
+        </style>
+
     </head>
 
     <body data-bs-spy="scroll" data-bs-target="#topnav-menu" data-bs-offset="60">
@@ -206,60 +218,32 @@
                 <!-- end row -->
 
                 <div class="row">
+                    @foreach ($lastCourses as $course)
                     <div class="col-xl-4 col-sm-6">
                         <div class="blog-box mb-4 mb-xl-0">
-                            <div class="position-relative">
-                                <img src="{{ asset('images/crypto/blog/img-1.jpg') }}" alt="" class="rounded img-fluid mx-auto d-block">
-                                <div class="badge bg-success blog-badge font-size-11">Teks</div>
+                            <div class="product-card">
+                                <div class="position-relative">
+                                    <img src="{{ getFile($course->thumbnail_url, asset('images/default-profile.jpg')) }}" alt="" class="rounded img-fluid mx-auto d-block product-image">
+                                    <div class="badge bg-success blog-badge font-size-11">
+                                        {{ $course->type }}
+                                    </div>
+                                </div>
+
+                                <div class="mt-4 text-muted">
+                                    <h5 class="mb-3">{{ $course->name }}</h5>
+                                    <p>
+                                        {{ Str::limit($course->summary, 88) }}
+                                    </p>
+                                </div>
                             </div>
 
-                            <div class="mt-4 text-muted">
-                                <h5 class="mb-3">Perkenalan HTML</h5>
-                                <p>HTML adalah bla bla bla lorem ipsum dolor sit amet lorem ipsum dolor sit amet</p>
-
-                                <div>
-                                    <a href="javascript: void(0);">Lihat detail</a>
-                                </div>
+                            <div>
+                                <a href="{{ route('dashboard.student.course.show', $course->slug) }}" class="">Lihat kursus</a>
                             </div>
                         </div>
                     </div>
+                    @endforeach
 
-                    <div class="col-xl-4 col-sm-6">
-                        <div class="blog-box mb-4 mb-xl-0">
-
-                            <div class="position-relative">
-                                <img src="{{ asset('images/crypto/blog/img-2.jpg') }}" alt="" class="rounded img-fluid mx-auto d-block">
-                                <div class="badge bg-success blog-badge font-size-11">Video</div>
-                            </div>
-
-                            <div class="mt-4 text-muted">
-                                <h5 class="mb-3">Phyton 101</h5>
-                                <p>Python adalah ular yang tidak punya bisa tapi lorem ipsuim dolor sit amet</p>
-
-                                <div>
-                                    <a href="javascript: void(0);">Lihat Detail</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-xl-4 col-sm-6">
-                        <div class="blog-box mb-4 mb-xl-0">
-                            <div class="position-relative">
-                                <img src="{{ asset('images/crypto/blog/img-3.jpg') }}" alt="" class="rounded img-fluid mx-auto d-block">
-                                <div class="badge bg-success blog-badge font-size-11">Teks</div>
-                            </div>
-
-                            <div class="mt-4 text-muted">
-                                <h5 class="mb-3">Logika Dan Algoritma Dasar</h5>
-                                <p>Algoritma adalah urutan penyelesaian masalah yang disusun secara sistematis dan menggunakan bahasa yang logis</p>
-
-                                <div>
-                                    <a href="javascript: void(0);">Lihat Detail</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 <!-- end row -->
             </div>

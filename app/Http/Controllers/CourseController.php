@@ -5,11 +5,18 @@ namespace App\Http\Controllers;
 use App\Enums\CourseLevelEnum;
 use App\Enums\CourseStatusEnum;
 use App\Enums\CourseTypeEnum;
+use App\Enums\UserAccessCourseStatusEnum;
+use App\Enums\UserAccessCourseStatusPaymentEnum;
 use App\Models\Course;
 use App\Models\CourseCategory;
+use App\Models\Material;
+use App\Models\Topic;
+use App\Models\UserAccessCourse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
+use App\Services\Midtrans\CreateSnapTokenService;
+use Illuminate\Support\Facades\DB;
 
 class CourseController extends Controller
 {
@@ -19,7 +26,7 @@ class CourseController extends Controller
         $data['pageTitle'] = 'Kursus';
         $data['courses'] = $courses;
 
-        return view('dashboard.course.index', $data);
+        return view('dashboard.admin.course.index', $data);
     }
 
     public function create()
@@ -28,7 +35,7 @@ class CourseController extends Controller
         $data['pageTitle'] = 'Tambah Kursus';
         $data['categories'] = $categories;
 
-        return view('dashboard.course.create', $data);
+        return view('dashboard.admin.course.create', $data);
     }
 
     public function store(Request $request)
@@ -67,7 +74,7 @@ class CourseController extends Controller
 
         $course->save();
 
-        return redirect()->route('dashboard.course.index')->with('success', 'Kursus berhasil ditambahkan');
+        return redirect()->route('dashboard.admin.course.index')->with('success', 'Kursus berhasil ditambahkan');
     }
 
     public function show($id)
@@ -86,7 +93,7 @@ class CourseController extends Controller
         $data['topics'] = $topics;
         $data['durationInMinute'] = $durationInMinute;
 
-        return view('dashboard.course.show', $data);
+        return view('dashboard.admin.course.show', $data);
     }
 
     public function edit($id)
@@ -97,7 +104,7 @@ class CourseController extends Controller
         $data['course'] = $course;
         $data['categories'] = $categories;
 
-        return view('dashboard.course.edit', $data);
+        return view('dashboard.admin.course.edit', $data);
     }
 
     public function update(Request $request, $id)
@@ -139,7 +146,7 @@ class CourseController extends Controller
 
         $course->save();
 
-        return redirect()->route('dashboard.course.index')->with('success', 'Kursus berhasil diubah');
+        return redirect()->route('dashboard.admin.course.index')->with('success', 'Kursus berhasil diubah');
     }
 
     public function destroy($id)
@@ -161,5 +168,160 @@ class CourseController extends Controller
                 'message' => $th->getMessage(),
             ], 500);
         }
+    }
+
+    public function indexStudent(Request $request)
+    {
+        $query = Course::where('status', CourseStatusEnum::ACTIVE);
+
+        if ($request->has('name')) {
+            $query->where('name', 'ILIKE', '%' . $request->name . '%');
+        }
+
+        if ($request->has('technology') && $request->technology != 'Semua Teknologi') {
+            $query->where('course_category_id', $request->technology);
+        }
+
+        if ($request->has('level') && $request->level != 'Semua Level') {
+            $query->where('level', CourseLevelEnum::getValueByLabel($request->level));
+        }
+
+        if ($request->has('types')) {
+            $query->whereIn('type', $request->types);
+        }
+
+        $courses = $query->get();
+
+        $courseCategories = CourseCategory::orderBy('name', 'asc')->get();
+
+        $data['pageTitle'] = 'Kursus';
+        $data['courses'] = $courses;
+        $data['courseCategories'] = $courseCategories;
+
+        return view('dashboard.student.course.index', $data);
+    }
+
+    public function indexEnrolled() {
+        $courses = Course::whereHas('users', function ($query) {
+            $query->where('user_id', auth()->user()->id);
+        })->get();
+
+        $data['pageTitle'] = 'Kursus saya';
+        $data['courses'] = $courses;
+
+        return view('dashboard.student.course.enrolled', $data);
+    }
+
+    public function showByStudendPov($slug) {
+        $course = Course::where('slug', $slug)->firstOrFail();
+        $topics = $course->topics()->orderBy('order', 'ASC')->get();
+        $access = UserAccessCourse::where('course_id', $course->id)->where('user_id', auth()->user()->id)->first();
+
+        $durationInMinute = 0;
+        $totalMaterial = 0;
+        foreach ($topics as $topic) {
+            $durationInMinute += $topic->materials->sum('duration_in_minutes');
+            $totalMaterial += $topic->materials->count();
+        }
+
+        $continueMaterialSlug = null;
+        if ($access && $access->last_material_id) {
+            $continueMaterial = Material::where('order', '>', $access->lastMaterial->order)->where('topic_id', $access->lastMaterial->topic_id)->orderBy('order', 'ASC')->first();
+
+            if (!$continueMaterial) {
+                $nextTopic = Topic::where('course_id', $course->id)->where('order', '>', $access->lastMaterial->topic->order)->orderBy('order', 'ASC')->first();
+                if ($nextTopic) {
+                    $continueMaterial = Material::where('topic_id', $nextTopic->id)->orderBy('order', 'ASC')->first();
+                    $continueMaterialSlug = $continueMaterial ? $continueMaterial->slug : $access->lastMaterial->slug;
+                }
+                $continueMaterialSlug = $access->lastMaterial->slug;
+            } else {
+                $continueMaterialSlug = $continueMaterial->slug;
+            }
+        } else {
+            $continueMaterialSlug = $topics->first()->materials()->orderBy('order', 'ASC')->first()->slug;
+        }
+        $rating = $course->feedbacks->avg('rating');
+
+        $data['pageTitle'] = 'Detail Kursus';
+        $data['course'] = $course;
+        $data['course']->discount = $course->retail_price != 0 ? ($course->price - $course->retail_price) / $course->price * 100 : 0;
+        $data['topics'] = $topics;
+        $data['durationInMinute'] = $durationInMinute;
+        $data['totalMaterial'] = $totalMaterial;
+        $data['access'] = $access;
+        $data['continueMaterialSlug'] = $continueMaterialSlug;
+        $data['rating'] = $rating;
+        $data['feedbacks'] = $course->feedbacks()->orderBy('created_at', 'DESC')->limit(3)->get();
+
+        return view('dashboard.student.course.show', $data);
+    }
+
+    public function enroll($slug) {
+        $course = Course::where('slug', $slug)->firstOrFail();
+        $userAccessCourse = $course->users()->where('user_id', auth()->user()->id)->first();
+
+        DB::beginTransaction();
+
+        if (!$userAccessCourse) {
+            $userAccessCourse = new UserAccessCourse();
+            $userAccessCourse->user_id = auth()->user()->id;
+            $userAccessCourse->course_id = $course->id;
+            $userAccessCourse->purchased_at = now('Asia/Jakarta');
+            $userAccessCourse->status = UserAccessCourseStatusEnum::UNPAID;
+            $userAccessCourse->payment_status = UserAccessCourseStatusPaymentEnum::PENDING;
+            $userAccessCourse->course_price = $course->price;
+            $userAccessCourse->course_retail_price = $course->retail_price;
+
+            if ($course->price == 0 && $course->retail_price == 0) {
+                $userAccessCourse->status = UserAccessCourseStatusEnum::ACTIVE;
+                $userAccessCourse->payment_status = UserAccessCourseStatusPaymentEnum::PAID;
+            }
+
+            $userAccessCourse->save();
+        }
+
+        try {
+            if(
+                is_null($userAccessCourse->snap_token) &&
+                $userAccessCourse->course_price > 0 &&
+                $userAccessCourse->status != UserAccessCourseStatusEnum::ACTIVE
+            ) {
+                $price = $userAccessCourse->course_retail_price > 0 ?
+                    $userAccessCourse->course_retail_price :
+                    $userAccessCourse->course_price;
+
+                $order = (object)[
+                    'id' => $userAccessCourse->id,
+                    'total_price' => $price,
+                    'items' => [
+                        [
+                            'id' => $course->id,
+                            'price' => $price,
+                            'quantity' => 1,
+                            'name' => $course->name,
+                        ],
+                    ],
+                    'user' => (object)[
+                        'name' => auth()->user()->name,
+                        'email' => auth()->user()->email,
+                        'phone_number' => auth()->user()->phone_number,
+                    ],
+                ];
+
+                $midtrans = new CreateSnapTokenService($order);
+                $snapToken = $midtrans->getSnapToken();
+
+                $userAccessCourse->snap_token = $snapToken;
+                $userAccessCourse->save();
+            }
+
+            DB::commit();
+        } catch (\Throwable $th) {
+            DB::rollBack();
+
+            return redirect()->route('dashboard.student.course.show', $course->slug)->with('error', $th->getMessage());
+        }
+        return redirect()->route('dashboard.student.course.show', $course->slug)->with('success', 'Kursus berhasil diambil');
     }
 }

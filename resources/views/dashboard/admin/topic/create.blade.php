@@ -13,18 +13,19 @@
         <div class="card">
             <div class="card-body">
 
-                <h4 class="card-title">Ubah topic</h4>
+                <h4 class="card-title">Tambah topik</h4>
                 <p class="card-title-desc">Isi informasi dibawah ini</p>
 
-                <form method="POST" action="{{ route('dashboard.course.topic.update', ['courseId' => $topic->course_id, 'id' => $topic->id]) }}" class="form-horizontal">
-                    @method('PUT')
+                <form method="POST" action="{{ route('dashboard.admin.course.topic.store', $course->id) }}" class="form-horizontal">
                     @csrf
+
+                    <input type="hidden" name="order" value="{{ $lastOrderTopic + 1 }}">
 
                     <div class="row">
                         <div class="col-12">
                             <div class="mb-3">
                                 <label for="name" class="form-label">Nama</label>
-                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" placeholder="Masukan nama" name="name" value="{{ old('name') ?? $topic->name }}">
+                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" placeholder="Masukan nama" name="name" value="{{ old('name') }}">
 
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
@@ -37,7 +38,7 @@
 
                     <div class="d-flex flex-wrap gap-2">
                         <button type="submit" class="btn btn-primary waves-effect waves-light">Simpan</button>
-                        <a href="{{ route('dashboard.course.show', $topic->course_id) }}" class="btn btn-secondary waves-effect waves-light">Batal</a>
+                        <a href="{{ route('dashboard.admin.course.show', $course->id) }}" class="btn btn-secondary waves-effect waves-light">Batal</a>
                     </div>
                 </form>
 

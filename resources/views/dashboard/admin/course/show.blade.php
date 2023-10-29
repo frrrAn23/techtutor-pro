@@ -42,6 +42,12 @@
                             @if ($course->discount > 0)
                                 <h6 class="text-success text-uppercase">Diskon {{ number_format($course->discount, 1) }} % </h6>
                                 <h5 class="mb-4">Harga : <span class="text-muted me-2"><del>Rp. {{ number_format($course->price, 0, ',', '.') }}</del></span> <b>Rp. {{ number_format($course->retail_price, 0, ',', '.') }}</b></h5>
+                            @else
+                                @if ($course->price == 0)
+                                    <h5 class="mb-4"><b>Gratis</b></h5>
+                                @else
+                                    <h5 class="mb-4">Harga : <b>Rp. {{ number_format($course->price, 0, ',', '.') }}</b></h5>
+                                @endif
                             @endif
 
                             <p class="text-muted mb-4">{{ $course->summary }}</p>
@@ -78,7 +84,7 @@
                     </div>
                     <div class="col-sm-8">
                         <div class="text-sm-end">
-                            <a href="{{ route('dashboard.course.topic.create', $course->id) }}" class="btn btn-success btn-rounded waves-effect waves-light mb-2 me-2"><i class="mdi mdi-plus me-1"></i> Tambah Topik</a>
+                            <a href="{{ route('dashboard.admin.course.topic.create', $course->id) }}" class="btn btn-success btn-rounded waves-effect waves-light mb-2 me-2"><i class="mdi mdi-plus me-1"></i> Tambah Topik</a>
                         </div>
                     </div>
                 </div>
@@ -100,7 +106,7 @@
                                         <div class="accordion" id="accordionMaterial">
                                             <div class="mb-3">
                                                 @if (!$loop->first)
-                                                    <form method="POST" action="{{ route('dashboard.course.topic.up', ['courseId' => $course->id, 'id' => $topic->id]) }}" class="d-inline">
+                                                    <form method="POST" action="{{ route('dashboard.admin.course.topic.up', ['courseId' => $course->id, 'id' => $topic->id]) }}" class="d-inline">
                                                         @method('PUT')
                                                         @csrf
                                                         <button type="submit" class="btn btn-primary waves-effect waves-light btn-sm">
@@ -110,7 +116,7 @@
                                                 @endif
 
                                                 @if (!$loop->last)
-                                                <form method="POST" action="{{ route('dashboard.course.topic.down', ['courseId' => $course->id, 'id' => $topic->id]) }}" class="d-inline">
+                                                <form method="POST" action="{{ route('dashboard.admin.course.topic.down', ['courseId' => $course->id, 'id' => $topic->id]) }}" class="d-inline">
                                                     @method('PUT')
                                                     @csrf
                                                     <button type="submit" class="btn btn-warning waves-effect waves-light btn-sm">
@@ -119,11 +125,11 @@
                                                 </form>
                                                 @endif
 
-                                                <a href="{{ route('dashboard.course.topic.edit', ['courseId' => $course->id, 'id' => $topic->id]) }}" class="btn btn-success waves-effect waves-light btn-sm">
+                                                <a href="{{ route('dashboard.admin.course.topic.edit', ['courseId' => $course->id, 'id' => $topic->id]) }}" class="btn btn-success waves-effect waves-light btn-sm">
                                                     <i class="mdi mdi-pencil"></i>
                                                 </a>
 
-                                                <a href="#" onclick="modalDelete('Topik', '{{ $topic->name }}', `{{ route('dashboard.course.topic.delete', ['courseId' => $course->id, 'id' => $topic->id]) }}`, '{{ url()->current() }}')" class="btn btn-danger waves-effect waves-light btn-sm">
+                                                <a href="#" onclick="modalDelete('Topik', '{{ $topic->name }}', `{{ route('dashboard.admin.course.topic.delete', ['courseId' => $course->id, 'id' => $topic->id]) }}`, '{{ url()->current() }}')" class="btn btn-danger waves-effect waves-light btn-sm">
                                                     <i class="mdi mdi-delete"></i>
                                                 </a>
                                             </div>
@@ -134,7 +140,7 @@
                                                 </div>
                                                 <div class="col-sm-8">
                                                     <div class="text-sm-end">
-                                                        <a href="{{ route('dashboard.course.material.create', $topic->id) }}" class="btn btn-success btn-rounded waves-effect waves-light mb-2 me-2 btn-sm"><i class="mdi mdi-plus me-1"></i> Tambah materi</a>
+                                                        <a href="{{ route('dashboard.admin.course.material.create', $topic->id) }}" class="btn btn-success btn-rounded waves-effect waves-light mb-2 me-2 btn-sm"><i class="mdi mdi-plus me-1"></i> Tambah materi</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -150,7 +156,7 @@
                                                     <div class="accordion-body">
                                                         <div class="mb-3">
                                                             @if (!$loop->first)
-                                                                <form method="POST" action="{{ route('dashboard.course.material.up', ['courseId' => $course->id, 'id' => $material->id]) }}" class="d-inline">
+                                                                <form method="POST" action="{{ route('dashboard.admin.course.material.up', ['courseId' => $course->id, 'id' => $material->id]) }}" class="d-inline">
                                                                     @method('PUT')
                                                                     @csrf
                                                                     <button type="submit" class="btn btn-primary waves-effect waves-light btn-sm">
@@ -160,7 +166,7 @@
                                                             @endif
 
                                                             @if (!$loop->last)
-                                                            <form method="POST" action="{{ route('dashboard.course.material.down', ['courseId' => $course->id, 'id' => $material->id]) }}" class="d-inline">
+                                                            <form method="POST" action="{{ route('dashboard.admin.course.material.down', ['courseId' => $course->id, 'id' => $material->id]) }}" class="d-inline">
                                                                 @method('PUT')
                                                                 @csrf
                                                                 <button type="submit" class="btn btn-warning waves-effect waves-light btn-sm">
@@ -169,12 +175,12 @@
                                                             </form>
                                                             @endif
 
-                                                            <a href="{{ route('dashboard.course.material.edit', ['courseId' => $course->id, 'id' => $material->id]) }}" class="btn btn-success waves-effect waves-light btn-sm">
+                                                            <a href="{{ route('dashboard.admin.course.material.edit', ['courseId' => $course->id, 'id' => $material->id]) }}" class="btn btn-success waves-effect waves-light btn-sm">
                                                                 <i class="mdi mdi-pencil"></i>
                                                             </a>
 
 
-                                                            <a href="#" onclick="modalDelete('Materi', '{{ $material->name }}', `{{ route('dashboard.course.material.delete', $material->id) }}`, '{{ url()->current() }}')" class="btn btn-danger waves-effect waves-light btn-sm">
+                                                            <a href="#" onclick="modalDelete('Materi', '{{ $material->name }}', `{{ route('dashboard.admin.course.material.delete', $material->id) }}`, '{{ url()->current() }}')" class="btn btn-danger waves-effect waves-light btn-sm">
                                                                 <i class="mdi mdi-delete"></i>
                                                             </a>
 

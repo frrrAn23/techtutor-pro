@@ -4,7 +4,7 @@
 <!-- CSRF Token -->
 <meta name="csrf-token" content="{{ csrf_token() }}">
 
-<title>TechTutor Pro | . ({{ $pageTitle ?? '' }})</title>
+<title>TechTutor Pro | {{ $pageTitle ?? '' }}</title>
 
 <link rel="shortcut icon" href="{{ asset('images/logo-techtutor-pro-only.jpg') }}">
 
@@ -21,6 +21,7 @@
 <!-- App Css-->
 <link href="{{ asset('css/app.min.css') }}" id="app-style" rel="stylesheet" type="text/css" />
 
+<link href="{{ asset('libs/prism/prism.css') }}" id="app-style" rel="stylesheet" type="text/css" />
 <!-- Custom Style Global -->
 <style>
 

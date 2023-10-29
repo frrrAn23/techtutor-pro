@@ -4,7 +4,7 @@
     @include('layouts.partials.style')
 </head>
 
-<body data-layout="horizontal" data-topbar="dark">
+<body @if (!request()->routeIs('dashboard.student.course.material.show')) data-layout="horizontal" @endif data-topbar="dark">
 
     <!-- Begin page -->
     <div id="layout-wrapper">
@@ -12,8 +12,7 @@
         @include('layouts.partials.header')
 
         <!-- ========== Left Sidebar Start ========== -->
-        <!-- show only if in route material detail -->
-        @if (false)
+        @if (request()->routeIs('dashboard.student.course.material.show'))
             @include('layouts.partials.sidebar')
         @endif
         <!-- Left Sidebar End -->

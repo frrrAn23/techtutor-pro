@@ -37,4 +37,14 @@ class Material extends Model
     {
         return $this->belongsTo(Topic::class);
     }
+
+    public function isCompletedByUser($userId)
+    {
+        return $this->hasMany(UserMaterialProgress::class)->where('user_id', $userId)->where('material_id', $this->id)->exists();
+    }
+
+    public function userMaterialProgresses()
+    {
+        return $this->hasMany(UserMaterialProgress::class);
+    }
 }

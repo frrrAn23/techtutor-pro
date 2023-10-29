@@ -13,14 +13,14 @@ class CourseCategoryController extends Controller
         $data['title'] = 'Kategori Kursus';
         $data['categories'] = CourseCategory::latest()->get();
 
-        return view('dashboard.course-category.index', $data);
+        return view('dashboard.admin.course-category.index', $data);
     }
 
     public function create()
     {
         $data['title'] = 'Tambah Kategori Kursus';
 
-        return view('dashboard.course-category.create', $data);
+        return view('dashboard.admin.course-category.create', $data);
     }
 
     public function store(Request $request)
@@ -33,7 +33,7 @@ class CourseCategoryController extends Controller
         $category->name = $request->name;
         $category->save();
 
-        return redirect()->route('dashboard.course-category.index')->with('success', 'Kategori kursus berhasil ditambahkan');
+        return redirect()->route('dashboard.admin.course-category.index')->with('success', 'Kategori kursus berhasil ditambahkan');
     }
 
     public function edit($id)
@@ -41,7 +41,7 @@ class CourseCategoryController extends Controller
         $data['title'] = 'Ubah Kategori Kursus';
         $data['category'] = CourseCategory::findOrFail($id);
 
-        return view('dashboard.course-category.edit', $data);
+        return view('dashboard.admin.course-category.edit', $data);
     }
 
     public function update(Request $request, $id)
@@ -54,7 +54,7 @@ class CourseCategoryController extends Controller
         $category->name = $request->name;
         $category->save();
 
-        return redirect()->route('dashboard.course-category.index')->with('success', 'Kategori kursus berhasil diubah');
+        return redirect()->route('dashboard.admin.course-category.index')->with('success', 'Kategori kursus berhasil diubah');
     }
 
     public function destroy($id)

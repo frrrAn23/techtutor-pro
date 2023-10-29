@@ -22,7 +22,7 @@
                     </div>
                     <div class="col-sm-8">
                         <div class="text-sm-end">
-                            <a href="{{ route('dashboard.course.create') }}" class="btn btn-success btn-rounded waves-effect waves-light mb-2 me-2"><i class="mdi mdi-plus me-1"></i> Tambah Kursus</a>
+                            <a href="{{ route('dashboard.admin.course.create') }}" class="btn btn-success btn-rounded waves-effect waves-light mb-2 me-2"><i class="mdi mdi-plus me-1"></i> Tambah Kursus</a>
                         </div>
                     </div>
                 </div>
@@ -63,9 +63,9 @@
                             </td>
                             <td>
                                 <div class="d-flex gap-3">
-                                    <a href="{{ route('dashboard.course.show', $course->id) }}" class="text-primary"><i class="mdi mdi-eye font-size-18"></i></a>
-                                    <a href="{{ route('dashboard.course.edit', $course->id) }}" class="text-success"><i class="mdi mdi-pencil font-size-18"></i></a>
-                                    <a href="#" onclick="modalDelete('Kursus', '{{ $course->name }}', `{{ route('dashboard.course.delete', $course->id) }}`, '{{ url()->current() }}')" class="text-danger"><i class="mdi mdi-delete font-size-18"></i></a>
+                                    <a href="{{ route('dashboard.admin.course.show', $course->id) }}" class="text-primary"><i class="mdi mdi-eye font-size-18"></i></a>
+                                    <a href="{{ route('dashboard.admin.course.edit', $course->id) }}" class="text-success"><i class="mdi mdi-pencil font-size-18"></i></a>
+                                    <a href="#" onclick="modalDelete('Kursus', '{{ $course->name }}', `{{ route('dashboard.admin.course.delete', $course->id) }}`, '{{ url()->current() }}')" class="text-danger"><i class="mdi mdi-delete font-size-18"></i></a>
                                 </div>
                             </td>
                         </tr>

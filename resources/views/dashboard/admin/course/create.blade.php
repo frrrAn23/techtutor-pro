@@ -17,7 +17,7 @@
                 <h4 class="card-title">Tambah kursus</h4>
                 <p class="card-title-desc">Isi informasi dibawah ini</p>
 
-                <form method="POST" action="{{ route('dashboard.course.store') }}" class="form-horizontal" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('dashboard.admin.course.store') }}" class="form-horizontal" enctype="multipart/form-data">
                     @csrf
 
                     <div class="row">
@@ -201,7 +201,7 @@
 
                     <div class="d-flex flex-wrap gap-2">
                         <button type="submit" class="btn btn-primary waves-effect waves-light">Simpan</button>
-                        <a href="{{ route('dashboard.course.index') }}" class="btn btn-secondary waves-effect waves-light">Batal</a>
+                        <a href="{{ route('dashboard.admin.course.index') }}" class="btn btn-secondary waves-effect waves-light">Batal</a>
                     </div>
                 </form>
 
@@ -217,7 +217,7 @@
 <script>
     $("#labels").select2({
         tags: true,
-        tokenSeparators: [',', ' '],
+        tokenSeparators: [','],
         createTag: function (params) {
             var term = $.trim(params.term);
 
@@ -262,15 +262,16 @@
         ],
         autosave_prefix: autoSavePrefix,
         width: '100%',
+        codesample_global_prismjs: true
     });
 
 
     setInterval(() => {
         var elementWithPythonTitle = document.querySelector('[title="Python"]');
+        var dialogWrap = document.querySelector('.tox-dialog-wrap');
 
-        if (elementWithPythonTitle) {
+        if (elementWithPythonTitle || dialogWrap.classList.contains('d-none')) {
             var listboxElement = document.querySelector('[role="listbox"]');
-            var dialogWrap = document.querySelector('.tox-dialog-wrap');
 
             if (listboxElement) {
                 dialogWrap.classList.add('d-none');

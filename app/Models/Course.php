@@ -61,6 +61,11 @@ class Course extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class, 'user_access_courses', 'course_id', 'user_id');
+        return $this->belongsToMany(User::class, 'user_access_courses', 'course_id', 'user_id')->withPivot('purchased_at', 'completed_at', 'last_material_id', 'status');
+    }
+
+    public function getRatingAttribute()
+    {
+        return $this->feedbacks->avg('rating');
     }
 }

@@ -13,18 +13,17 @@
         <div class="card">
             <div class="card-body">
 
-                <h4 class="card-title">Ubah materi untuk topic <u class="">{{ $material->topic->name }}</u> pada kursus <u>{{ $material->topic->course->name }}</u></h4>
+                <h4 class="card-title">Tambah materi untuk topic <u class="">{{ $topic->name }}</u> pada kursus <u>{{ $topic->course->name }}</u></h4>
                 <p class="card-title-desc">Isi informasi dibawah ini</p>
 
-                <form method="POST" action="{{ route('dashboard.course.material.update', $material->id) }}" class="form-horizontal" enctype="multipart/form-data">
-                    @method('PUT')
+                <form method="POST" action="{{ route('dashboard.admin.course.material.store', $topic->id) }}" class="form-horizontal" enctype="multipart/form-data">
                     @csrf
 
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="mb-3">
                                 <label for="name" class="form-label">Nama</label>
-                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" placeholder="Masukan nama" name="name" value="{{ old('name') ?? $material->name }}">
+                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" placeholder="Masukan nama" name="name" value="{{ old('name') }}">
 
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
@@ -33,10 +32,10 @@
                                 @enderror
                             </div>
 
-                            @if ($material->course->type === App\Enums\CourseTypeEnum::VIDEO)
+                            @if ($course->type === App\Enums\CourseTypeEnum::VIDEO)
                             <div class="mb-3">
                                 <label for="video-url" class="form-label">Link Video</label>
-                                <input type="text" class="form-control @error('video_url') is-invalid @enderror" id="video-url" placeholder="Masukan link video" name="video_url" value="{{ old('video_url') ?? $material->video_url }}">
+                                <input type="text" class="form-control @error('video_url') is-invalid @enderror" id="video-url" placeholder="Masukan link video" name="video_url" value="{{ old('video_url') }}">
 
                                 @error('video_url')
                                     <span class="invalid-feedback" role="alert">
@@ -50,7 +49,7 @@
                                 <label for="price" class="form-label">Durasi</label>
                                 <span class="text-muted">(dalam menit)</span>
 
-                                <input type="number" class="form-control @error('duration_in_minutes') is-invalid @enderror" id="duration_in_minutes" placeholder="Masukan durasi menyelesaikan materi" name="duration_in_minutes" value="{{ old('duration_in_minutes') ?? $material->duration_in_minutes }}">
+                                <input type="number" class="form-control @error('duration_in_minutes') is-invalid @enderror" id="duration_in_minutes" placeholder="Masukan durasi menyelesaikan materi" name="duration_in_minutes" value="{{ old('duration_in_minutes') }}">
 
                                 @error('duration_in_minutes')
                                     <span class="invalid-feedback" role="alert">
@@ -65,7 +64,7 @@
                                 <select class="form-select @error('status') is-invalid @enderror" name="status">
                                     <option disabled>Pilih</option>
                                     @foreach (App\Enums\MaterialStatusEnum::getValues() as $materialStatus)
-                                        <option value="{{ $materialStatus }}" {{ old('status') ?? $material->status == $materialStatus ? 'selected' : '' }}>{{ $materialStatus }}</option>
+                                        <option value="{{ $materialStatus }}" {{ old('status') == $materialStatus ? 'selected' : '' }}>{{ $materialStatus }}</option>
                                     @endforeach
                                 </select>
 
@@ -77,7 +76,7 @@
                             </div>
 
                             <div class="form-check form-switch form-switch-md mb-3">
-                                <input class="form-check-input" type="checkbox" id="is_preview" value="true" name="is_preview" {{ old('is_preview') ?? $material->is_preview == 'true' ? 'checked' : ''}}>
+                                <input class="form-check-input" type="checkbox" id="is_preview" value="true" name="is_preview" {{ old('is_preview') ? 'checked' : ''}}>
                                 <label class="form-check-label" for="is_preview">Pratinjau</label>
                             </div>
                         </div>
@@ -87,7 +86,7 @@
                                 <label class="form-label">Konten</label>
 
                                 <textarea id="content" name="content">
-                                    {{ old('content') ?? $material->content }}
+                                    {{ old('content') }}
                                 </textarea>
 
                                 @error('content')
@@ -101,7 +100,7 @@
 
                     <div class="d-flex flex-wrap gap-2">
                         <button type="submit" class="btn btn-primary waves-effect waves-light">Simpan</button>
-                        <a href="{{ route('dashboard.course.show', $material->topic->course_id) }}" class="btn btn-secondary waves-effect waves-light">Batal</a>
+                        <a href="{{ route('dashboard.admin.course.show', $topic->course_id) }}" class="btn btn-secondary waves-effect waves-light">Batal</a>
                     </div>
                 </form>
             </div>
@@ -113,7 +112,7 @@
 @push('script')
 <script src="{{ asset('libs/tinymce/tinymce.min.js') }}"></script>
 <script>
-    autoSavePrefix = 'edit-material-{{ Auth::user()->id }}-{{ $material->id }}';
+    autoSavePrefix = 'create-material-{{ Auth::user()->id }}';
 
     tinymce.init({
         selector: '#content',
@@ -142,15 +141,16 @@
         ],
         autosave_prefix: autoSavePrefix,
         width: '100%',
+        codesample_global_prismjs: true
     });
 
 
     setInterval(() => {
         var elementWithPythonTitle = document.querySelector('[title="Python"]');
+        var dialogWrap = document.querySelector('.tox-dialog-wrap');
 
-        if (elementWithPythonTitle) {
+        if (elementWithPythonTitle || dialogWrap.classList.contains('d-none')) {
             var listboxElement = document.querySelector('[role="listbox"]');
-            var dialogWrap = document.querySelector('.tox-dialog-wrap');
 
             if (listboxElement) {
                 dialogWrap.classList.add('d-none');

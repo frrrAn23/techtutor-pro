@@ -10,6 +10,8 @@ class Feedback extends Model
 {
     use HasFactory, Uuidable;
 
+    protected $table = 'feedbacks';
+
     public $incrementing = false;
 
     protected $keyType = 'uuid';
@@ -28,8 +30,6 @@ class Feedback extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class)->withDefault([
-            'name' => 'Anonymous',
-        ]);
+        return $this->belongsTo(User::class);
     }
 }

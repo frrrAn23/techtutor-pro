@@ -18,7 +18,7 @@ class TopicController extends Controller
         $data['course'] = $course;
         $data['lastOrderTopic'] = $lastOrderTopic->order ?? 0;
 
-        return view('dashboard.topic.create', $data);
+        return view('dashboard.admin.topic.create', $data);
     }
 
     public function store(Request $request, $courseId)
@@ -35,7 +35,7 @@ class TopicController extends Controller
             'order' => $request->order,
         ]);
 
-        return redirect()->route('dashboard.course.show', $courseId)->with('success', 'Topik berhasil ditambahkan');
+        return redirect()->route('dashboard.admin.course.show', $courseId)->with('success', 'Topik berhasil ditambahkan');
     }
 
     public function edit($courseId, $topicId)
@@ -45,7 +45,7 @@ class TopicController extends Controller
         $data['pageTitle'] = 'Ubah Topik';
         $data['topic'] = $topic;
 
-        return view('dashboard.topic.edit', $data);
+        return view('dashboard.admin.topic.edit', $data);
     }
 
     public function update(Request $request, $courseId, $topicId)
@@ -60,7 +60,7 @@ class TopicController extends Controller
             'name' => $request->name,
         ]);
 
-        return redirect()->route('dashboard.course.show', $courseId)->with('success', 'Topik berhasil diubah');
+        return redirect()->route('dashboard.admin.course.show', $courseId)->with('success', 'Topik berhasil diubah');
     }
 
     public function up($courseId, $topicId)
@@ -80,7 +80,7 @@ class TopicController extends Controller
             ]);
         }
 
-        return redirect()->route('dashboard.course.show', $courseId)->with('success', 'Topik berhasil diubah posisinya');
+        return redirect()->route('dashboard.admin.course.show', $courseId)->with('success', 'Topik berhasil diubah posisinya');
     }
 
     public function down($courseId, $topicId)
@@ -100,7 +100,7 @@ class TopicController extends Controller
             ]);
         }
 
-        return redirect()->route('dashboard.course.show', $courseId)->with('success', 'Topik berhasil diubah posisinya');
+        return redirect()->route('dashboard.admin.course.show', $courseId)->with('success', 'Topik berhasil diubah posisinya');
     }
 
     public function delete($courseId, $topicId)

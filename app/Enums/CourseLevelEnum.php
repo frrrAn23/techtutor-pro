@@ -30,4 +30,9 @@ class CourseLevelEnum
     {
         return self::getValuesAndLabels()[$value];
     }
+
+    public static function getValueByLabel($label)
+    {
+        return array_search($label, self::getValuesAndLabels());
+    }
 }
