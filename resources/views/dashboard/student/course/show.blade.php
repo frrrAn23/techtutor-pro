@@ -122,7 +122,7 @@
                                     <div>
                                         <p><span class="text-muted">Type:</span> {{ $course->type }}</p>
                                         <p><span class="text-muted">Level:</span> {{ App\Enums\CourseLevelEnum::getLabel($course->level) }}</p>
-                                        @foreach ($course->labels as $label)
+                                        @foreach ($course->labels ?? [] as $label)
                                             <span class="badge rounded-pill badge-soft-info font-size-12">{{ $label }}</span>
                                         @endforeach
                                     </div>

@@ -90,7 +90,7 @@
 
                                     <div class="mt-4">
                                         <span class="badge badge-soft-success font-size-12">{{ $course->type }}</span>
-                                        @foreach ($course->labels as $label)
+                                        @foreach ($course->labels ?? [] as $label)
                                             <span class="badge rounded-pill badge-soft-info font-size-12">{{ $label }}</span>
                                         @endforeach
                                     </div>
