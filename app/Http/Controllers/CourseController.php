@@ -180,7 +180,7 @@ class CourseController extends Controller
     {
         $query = Course::whereIn('status', [CourseStatusEnum::ACTIVE, CourseStatusEnum::INACTIVE]);
 
-        if ($request->has('name')) {
+        if ($request->has('name') && trim($request->name) != '') {
             $query->where('name', 'ILIKE', '%' . $request->name . '%');
         }
 
