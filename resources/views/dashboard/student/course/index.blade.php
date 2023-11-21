@@ -135,7 +135,7 @@
         <div class="row">
             @forelse ($courses as $course)
                 @php
-                    $course->discount = $course->retail_price != 0 ? ($course->price - $course->retail_price) / $course->price * 100 : 0;
+                    $course->discount = ($course->retail_price != 0 || $course->price != 0)  ? ($course->price - $course->retail_price) / $course->price * 100 : 0;
                     $course->duration_in_minutes = $course->topics->sum(function ($topic) {
                         return $topic->materials->sum('duration_in_minutes');
                     });
