@@ -279,7 +279,7 @@ class CourseController extends Controller
             $userAccessCourse->course_price = $course->price;
             $userAccessCourse->course_retail_price = $course->retail_price;
 
-            if ($course->price == 0 && $course->retail_price == 0) {
+            if ($course->retail_price == 0) {
                 $userAccessCourse->status = UserAccessCourseStatusEnum::ACTIVE;
                 $userAccessCourse->payment_status = UserAccessCourseStatusPaymentEnum::PAID;
             }

@@ -75,7 +75,7 @@
                     <div class="my-2 ms-lg-2">
                         @guest
                                 <a href="{{ route('login') }}" class="btn btn-outline-success w-xs">Login</a>
-                                <a href="{{ route('register') }}" class="btn btn-dark waves-effect waves-light w-xs">Register</a>
+                                <a href="{{ route('register') }}" class="btn btn-dark waves-effect waves-light w-xs">Registrasi</a>
                         @endguest
 
                         @auth
