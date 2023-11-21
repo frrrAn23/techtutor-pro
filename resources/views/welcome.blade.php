@@ -205,50 +205,52 @@
         <!-- Features end -->
 
         <!-- Blog start -->
-        <section class="section bg-white" id="news">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="text-center mb-5">
-                            <div class="small-title">Kursus</div>
-                            <h4>Kursus Terbaru</h4>
+        @if (count($lastCourses) > 0)
+            <section class="section bg-white" id="news">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="text-center mb-5">
+                                <div class="small-title">Kursus</div>
+                                <h4>Kursus Terbaru</h4>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <!-- end row -->
+                    <!-- end row -->
 
-                <div class="row">
-                    @foreach ($lastCourses as $course)
-                    <div class="col-xl-4 col-sm-6">
-                        <div class="blog-box mb-4 mb-xl-0">
-                            <div class="product-card">
-                                <div class="position-relative">
-                                    <img src="{{ getFile($course->thumbnail_url, asset('images/default-profile.jpg')) }}" alt="" class="rounded img-fluid mx-auto d-block product-image">
-                                    <div class="badge bg-success blog-badge font-size-11">
-                                        {{ $course->type }}
+                    <div class="row">
+                        @foreach ($lastCourses as $course)
+                        <div class="col-xl-4 col-sm-6">
+                            <div class="blog-box mb-4 mb-xl-0">
+                                <div class="product-card">
+                                    <div class="position-relative">
+                                        <img src="{{ getFile($course->thumbnail_url, asset('images/default-profile.jpg')) }}" alt="" class="rounded img-fluid mx-auto d-block product-image">
+                                        <div class="badge bg-success blog-badge font-size-11">
+                                            {{ $course->type }}
+                                        </div>
+                                    </div>
+
+                                    <div class="mt-4 text-muted">
+                                        <h5 class="mb-3">{{ $course->name }}</h5>
+                                        <p>
+                                            {{ Str::limit($course->summary, 88) }}
+                                        </p>
                                     </div>
                                 </div>
 
-                                <div class="mt-4 text-muted">
-                                    <h5 class="mb-3">{{ $course->name }}</h5>
-                                    <p>
-                                        {{ Str::limit($course->summary, 88) }}
-                                    </p>
+                                <div>
+                                    <a href="{{ route('dashboard.student.course.show', $course->slug) }}" class="">Lihat kursus</a>
                                 </div>
                             </div>
-
-                            <div>
-                                <a href="{{ route('dashboard.student.course.show', $course->slug) }}" class="">Lihat kursus</a>
-                            </div>
                         </div>
-                    </div>
-                    @endforeach
+                        @endforeach
 
+                    </div>
+                    <!-- end row -->
                 </div>
-                <!-- end row -->
-            </div>
-            <!-- end container -->
-        </section>
+                <!-- end container -->
+            </section>
+        @endif
         <!-- Blog end -->
 
         <!-- Faqs start -->

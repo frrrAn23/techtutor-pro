@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
@@ -11,6 +12,11 @@ class DashboardController extends Controller
      */
     public function __invoke(Request $request)
     {
-        return view('dashboard.index');
+        $user = Auth::user();
+
+        $data['user'] = $user;
+        $data['userAccessCourses'] = $user->userAccessCourses()->with('course')->get();
+
+        return view('dashboard.index', $data);
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\CourseStatusEnum;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    $lastCourses = \App\Models\Course::orderBy('created_at', 'desc')->limit(3)->get();
+    $lastCourses = \App\Models\Course::whereIn('status', [CourseStatusEnum::ACTIVE, CourseStatusEnum::INACTIVE])->orderBy('created_at', 'desc')->limit(3)->get();
     return view('welcome', compact('lastCourses'));
 });
 

@@ -41,7 +41,7 @@
         <div class="card">
             <div class="card-body">
 
-                <h4 class="card-title">Berikan feedback untuk kelas:</h4>
+                <h4 class="card-title">Berikan feedback untuk kursus:</h4>
                 <p class="card-title-desc">{{ $course->name }}</p>
 
                 <form method="POST" action="{{ route('dashboard.student.course.feedback.store', $course->slug) }}" class="form-horizontal" enctype="multipart/form-data">

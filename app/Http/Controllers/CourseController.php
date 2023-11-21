@@ -83,15 +83,21 @@ class CourseController extends Controller
         $topics = $course->topics()->orderBy('order', 'asc')->get();
 
         $durationInMinute = 0;
+        $totalMaterial = 0;
         foreach ($topics as $topic) {
             $durationInMinute += $topic->materials->sum('duration_in_minutes');
+            $totalMaterial += $topic->materials->count();
         }
+
+        $rating = $course->feedbacks->avg('rating');
 
         $data['pageTitle'] = 'Detail Kursus';
         $data['course'] = $course;
-        $data['course']->discount = $course->retail_price != 0 ? ($course->price - $course->retail_price) / $course->price * 100 : 0;
+        $data['course']->discount = ($course->retail_price != 0 || $course->price != 0) ? ($course->price - $course->retail_price) / $course->price * 100 : 0;
         $data['topics'] = $topics;
         $data['durationInMinute'] = $durationInMinute;
+        $data['rating'] = $rating;
+        $data['totalMaterial'] = $totalMaterial;
 
         return view('dashboard.admin.course.show', $data);
     }
@@ -172,7 +178,7 @@ class CourseController extends Controller
 
     public function indexStudent(Request $request)
     {
-        $query = Course::where('status', CourseStatusEnum::ACTIVE);
+        $query = Course::whereIn('status', [CourseStatusEnum::ACTIVE, CourseStatusEnum::INACTIVE]);
 
         if ($request->has('name')) {
             $query->where('name', 'ILIKE', '%' . $request->name . '%');
@@ -245,7 +251,7 @@ class CourseController extends Controller
 
         $data['pageTitle'] = 'Detail Kursus';
         $data['course'] = $course;
-        $data['course']->discount = $course->retail_price != 0 ? ($course->price - $course->retail_price) / $course->price * 100 : 0;
+        $data['course']->discount = ($course->retail_price != 0 || $course->price != 0) ? ($course->price - $course->retail_price) / $course->price * 100 : 0;
         $data['topics'] = $topics;
         $data['durationInMinute'] = $durationInMinute;
         $data['totalMaterial'] = $totalMaterial;

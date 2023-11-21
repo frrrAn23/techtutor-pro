@@ -13,7 +13,7 @@ if (!function_exists('storeFile')) {
 if (!function_exists('deleteFile')) {
     function deleteFile($filePath, $disk = 'public') {
         if ($disk == 'public') {
-            if (Storage::disk('public')->exists($filePath)) {
+            if ($filePath && Storage::disk('public')->exists($filePath)) {
                 Storage::disk('public')->delete($filePath);
             }
         }

@@ -43,7 +43,7 @@
                                             <form action="{{ route('dashboard.student.course.enroll', $course->slug) }}" method="POST">
                                                 @csrf
                                                 <button type="submit" class="btn btn-success waves-effect waves-light me-1 w-100">
-                                                    <i class="mdi mdi-cart me-1"></i> Beli Kelas
+                                                    <i class="mdi mdi-cart me-1"></i> Beli Kursus
                                                 </button>
                                             </form>
                                         @else
@@ -58,20 +58,26 @@
                                     @elseif ($access->status == App\Enums\UserAccessCourseStatusEnum::ACTIVE)
                                         <a href="{{ route('dashboard.student.course.material.show', ['slugCourse' => $course->slug, 'slugMaterial' => $continueMaterialSlug]) }}" class="btn btn-primary waves-effect waves-light mt-4 me-1 w-100">
                                             @if ($access->last_material_id == null)
-                                                Mulai Kelas
+                                                Mulai Kursus
                                             @else
-                                                Lanjutkan Kelas
+                                                Lanjutkan Kursus
                                             @endif
                                         </a>
 
                                     @endif
                                 @else
-                                    <form action="{{ route('dashboard.student.course.enroll', $course->slug) }}" method="POST">
-                                        @csrf
-                                        <button type="submit" class="btn btn-success waves-effect waves-light mt-4 me-1 w-100">
-                                            <i class="mdi mdi-cart me-1"></i> Beli Kelas
-                                        </button>
-                                    </form>
+                                    @if ($course->status == App\Enums\CourseStatusEnum::ACTIVE)
+                                        <form action="{{ route('dashboard.student.course.enroll', $course->slug) }}" method="POST">
+                                            @csrf
+                                            <button type="submit" class="btn btn-success waves-effect waves-light mt-4 me-1 w-100">
+                                                <i class="mdi mdi-cart me-1"></i> Beli Kursus
+                                            </button>
+                                        </form>
+                                    @else
+                                        <div class="alert alert-danger mt-2" role="alert">
+                                            Kursus ini telah di nonaktifkan
+                                        </div>
+                                    @endif
                                 @endif
                             </div>
                         </div>
@@ -138,7 +144,7 @@
     <div class="col-lg-8">
         <div class="card">
             <div class="card-body">
-                <h5 class="mb-3">Tentang Kelas :</h5>
+                <h5 class="mb-3">Tentang Kursus :</h5>
 
                 {!! $course->description !!}
             </div>

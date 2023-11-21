@@ -77,7 +77,7 @@
                         </select>
                     </div>
 
-                    <div class="mt-4 pt-3">
+                    <!-- <div class="mt-4 pt-3">
                         <h5 class="font-size-14 mb-3">Feedback Siswa</h5>
                         <div>
                             <div class="form-check mt-2">
@@ -113,7 +113,7 @@
                             </div>
 
                         </div>
-                    </div>
+                    </div> -->
 
                     <!-- submit button with class success -->
                     <div class="mt-4 pt-3">

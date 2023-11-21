@@ -31,17 +31,37 @@
                             <h4 class="mt-1 mb-3">{{ $course->name }}</h4>
 
                             <p class="text-muted float-start me-3">
-                                <span class="bx bxs-star text-warning"></span>
-                                <span class="bx bxs-star text-warning"></span>
-                                <span class="bx bxs-star text-warning"></span>
-                                <span class="bx bxs-star text-warning"></span>
-                                <span class="bx bxs-star"></span>
+                                    @for ($i = 1; $i <= $rating; $i++)
+                                        <i class="bx bxs-star text-warning"></i>
+                                    @endfor
+                                    @for ($i = $rating; $i < 5; $i++)
+                                        <i class="bx bxs-star"></i>
+                                    @endfor
                             </p>
-                            <p class="text-muted mb-4">( 152 Feedback )</p>
+                            <p class="text-muted mb-3">({{ $course->feedbacks->count() }} Feedback)</p>
+
+                            <div class="mb-4">
+                                @php
+                                    $level = $course->level;
+                                    $levelLabel = $level == 0 ? 'Pemula' : ($level == 1 ? 'Menengah' : 'Mahir');
+                                    $levelColor = $level == 0 ? 'primary' : ($level == 1 ? 'warning' : 'danger');
+                                @endphp
+                                <span class="badge rounded-pill bg-{{ $levelColor }} font-size-12">{{ $levelLabel }}</span>
+
+                                <span class="ms-2 font-size-12"><i class="mdi mdi-account"></i> {{ $course->users->count() }} Siswa</span>
+                                <span class="ms-2 font-size-12"><i class="mdi mdi-book-open-page-variant"></i> {{ $totalMaterial }} Materi</span>
+                                <span class="ms-2 font-size-12"><i class="mdi mdi-clock-outline"></i> {{ $durationInMinute }} Menit</span>
+                            </div>
 
                             @if ($course->discount > 0)
                                 <h6 class="text-success text-uppercase">Diskon {{ number_format($course->discount, 1) }} % </h6>
-                                <h5 class="mb-4">Harga : <span class="text-muted me-2"><del>Rp. {{ number_format($course->price, 0, ',', '.') }}</del></span> <b>Rp. {{ number_format($course->retail_price, 0, ',', '.') }}</b></h5>
+                                <h5 class="mb-4">Harga : <span class="text-muted me-2"><del>Rp. {{ number_format($course->price, 0, ',', '.') }}</del></span>
+                                    @if ($course->retail_price > 0)
+                                        Rp. {{ number_format($course->retail_price, 0, ',', '.') }}
+                                    @else
+                                        <b>Gratis</b>
+                                    @endif
+                                </h5>
                             @else
                                 @if ($course->price == 0)
                                     <h5 class="mb-4"><b>Gratis</b></h5>
@@ -67,7 +87,7 @@
                 <!-- end row -->
 
                 <div class="mt-5">
-                    <h5 class="mb-3">Tentang Kelas :</h5>
+                    <h5 class="mb-3">Tentang Kursus :</h5>
 
                     {!! $course->description !!}
                 </div>
