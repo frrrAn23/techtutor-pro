@@ -51,7 +51,7 @@
                                     </div>
                                     <div class="p-2 mt-4">
                                         <h4>Verifikasi email anda</h4>
-                                        <p>Kami telah mengirimkan anda link verifikasi ke email <span class="fw-semibold">{{ Auth::user()->email }}</span>, anda perlu memverifikasi email anda untuk menggunakan techtutorpro</p>
+                                        <p>Kami telah mengirimkan anda link verifikasi ke email <span class="fw-semibold">{{ Auth::user()->email }}</span>, anda perlu memverifikasi email anda untuk menggunakan techtutorpro, jika anda tidak menemukannya periksa folder spam</p>
                                     </div>
                                 </div>
                             </div>

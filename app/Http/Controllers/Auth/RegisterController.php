@@ -79,8 +79,6 @@ class RegisterController extends Controller
             'status' => UserStatusEnum::UNVERIFIED
         ]);
 
-        $user->sendEmailVerificationNotification();
-
         return $user;
     }
 }
