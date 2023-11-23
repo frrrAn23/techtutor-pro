@@ -6,6 +6,9 @@
         <meta charset="utf-8" />
         <title>TechTutor Pro</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="techtutorpro platform kursus online teknologi">
+        <meta name="keywords" content="techtutor, techtutorpro, kursus online, platform kursus online">
+        <meta name="google-site-verification" content="aEPRquVrya1KgKn5TXMgqpF5A47i050myHGriD61xXA" />
 
         <!-- App favicon -->
         <link rel="shortcut icon" href="{{ asset('images/logo-techtutor-pro-only.jpg') }}">
