@@ -18,12 +18,7 @@
             <div class="card-body">
                 <div class="row mb-2">
                     <div class="col-sm-4">
-                        <h4 class="card-title">Data kategori kursus</h4>
-                    </div>
-                    <div class="col-sm-8">
-                        <div class="text-sm-end">
-                            <a href="{{ route('dashboard.admin.course-category.create') }}" class="btn btn-success btn-rounded waves-effect waves-light mb-2 me-2"><i class="mdi mdi-plus me-1"></i> Tambah Kategori Kursus</a>
-                        </div>
+                        <h4 class="card-title">Data user akses kursus</h4>
                     </div>
                 </div>
 
@@ -45,9 +40,6 @@
                                 {{ $access->user->name }}
                             </td>
                             <td>{{ $access->course->name }}</td>
-                            <td>
-                                {{ $category->courses->count() }}
-                            </td>
                             <td>
                                 {{ date('d M Y', strtotime($access->purchased_at)) }}
                             </td>
