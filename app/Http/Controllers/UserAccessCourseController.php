@@ -11,6 +11,6 @@ class UserAccessCourseController extends Controller
         $data['pageTitle'] = 'Akses Kelas';
         $data['userAccessCourses'] = UserAccessCourse::latest()->get();
 
-        return view('dashboard.user-access-course.index', $data);
+        return view('dashboard.admin.user-access-course.index', $data);
     }
 }
