@@ -92,6 +92,10 @@ Route::prefix('dashboard')->middleware(['auth', 'verified'])->name('dashboard.')
                 Route::delete('/delete/{id}', [App\Http\Controllers\MaterialController::class, 'delete'])->name('delete');
             });
         });
+
+        Route::prefix('access')->name('access.')->group(function() {
+            Route::get('/', [App\Http\Controllers\UserAccessCourseController::class, 'index'])->name('index');
+        });
     });
 
     Route::prefix('student')->name('student.')->middleware(['roles:student'])->group(function () {

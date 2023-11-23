@@ -61,6 +61,10 @@
                                         <a class="nav-link" href="{{ route('dashboard.admin.course.index') }}">
                                             <i class="bx bx-book me-2"></i><span key="t-dashboards">Kursus</span>
                                         </a>
+
+                                        <a class="nav-link" href="{{ route('dashboard.admin.access.index') }}">
+                                            <i class="bx bx-key me-2"></i><span key="t-dashboards">User Akses</span>
+                                        </a>
                                     @elseif (Auth::user()->role->name == App\Enums\RoleEnum::STUDENT)
                                         <a class="nav-link" href="{{ route('dashboard.student.course.index') }}">
                                             <i class="bx bx-book me-2"></i><span key="t-dashboards">List kursus</span>
