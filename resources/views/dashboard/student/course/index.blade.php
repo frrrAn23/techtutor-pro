@@ -154,7 +154,7 @@
                                     @if ($course->discount > 0)
                                         <div class="avatar-sm product-ribbon">
                                             <span class="avatar-title rounded-circle bg-primary">
-                                                - {{ number_format($course->discount, 1) }} %
+                                                {{ number_format($course->discount) }} %
                                             </span>
                                         </div>
                                     @endif

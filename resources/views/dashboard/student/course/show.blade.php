@@ -112,7 +112,7 @@
                             </div>
 
                             @if ($course->discount > 0)
-                                <h6 class="text-success text-uppercase">Diskon {{ number_format($course->discount, 1) }} % </h6>
+                                <h6 class="text-success text-uppercase">Diskon {{ number_format($course->discount) }} % </h6>
                                 <h5 class="mb-4">Harga : <span class="text-muted me-2"><del>Rp. {{ number_format($course->price, 0, ',', '.') }}</del></span> <b>Rp. {{ number_format($course->retail_price, 0, ',', '.') }}</b></h5>
                             @else
                                 @if ($course->price == 0)
