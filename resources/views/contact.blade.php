@@ -248,7 +248,7 @@
                             <textarea name="komentar" placeholder="Apa yang ingin ditanyakan?"></textarea>
                         </div>
                     </div>
-                    <input type="submit" value="Kirim" class="submit-button">
+                    <input type="reset" value="Kirim" class="submit-button">
                 </form>
             </div>
             <div class="info-wrap">
