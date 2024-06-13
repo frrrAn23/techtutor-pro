@@ -72,6 +72,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#faqs">FAQs</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('contact') }}">Kontak Kami</a>
+                        </li>
 
                     </ul>
 

@@ -22,6 +22,11 @@ Route::get('/', function () {
     return view('welcome', compact('lastCourses'));
 });
 
+// contact
+Route::get('/contact', function () {
+    return view('contact');
+})->name('contact');
+
 Route::prefix('email')->middleware('auth')->group(function () {
     Route::get('/verify', [App\Http\Controllers\UserController::class, 'verifyEmail'])->name('verification.notice');
     Route::get('/verify/{id}/{hash}', [App\Http\Controllers\UserController::class, 'verifyEmailToken'])->middleware(['signed'])->name('verification.verify');
