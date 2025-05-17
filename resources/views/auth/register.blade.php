@@ -112,9 +112,29 @@
                         </div>
                     </div>
 
-                    <div class="mt-5 text-center">
+                    <div class="mt-1 text-center">
+                                    <div class="mt-1 text-center">
+                                        <p class="text-muted mb-2">Atau registrasi dengan</p>
+                                        <div class="d-grid justify-content-center gap-2" > <!-- justify-content-center bisa dtambahkan/dihapus -->
+                                            <a href="{{ route('register.google') }}" class="btn btn-outline-primary hover-effect"> <!-- Mengganti btn btn-light border dengan btn btn-outline-primary hover-effect -->
+                                                <img src="{{ asset('./images/google.svg') }}" alt="Google" height="20" class="me-2">
+                                                Sign in with Google
+                                            </a>
+                                            <a href="" class="btn btn-outline-primary hover-effect">
+                                                <img src="{{ asset('./images/facebook.svg') }}" alt="Facebook" height="20" class="me-2">
+                                                Sign in with Facebook
+                                            </a>
+                                            <a href="{{ route('register.github') }}" class="btn btn-outline-primary hover-effect"> 
+                                                <img src="{{ asset('./images/GitHub_light.svg') }}" alt="GitHub" height="20" class="me-2">
+                                                Sign in with GitHub
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                    <div class="mt-3 text-center">
                         <div>
-                            <p>Sudah punya akun ? <a href="{{ route('login') }}" class="fw-medium text-primary"> Login</a> </p>
+                            <p class="mb-1">Sudah punya akun ? <a href="{{ route('login') }}" class="fw-medium text-primary"> Login</a> </p>
                             <p>© {{ date('Y') }} TechTutor Pro. Made with <i class="mdi mdi-heart text-danger"></i> by TechTutor Pro</p>
                         </div>
                     </div>

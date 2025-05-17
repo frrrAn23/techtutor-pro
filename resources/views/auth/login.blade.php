@@ -105,18 +105,34 @@
                                         <a href="{{ route('password.request') }}" class="text-muted"><i class="mdi mdi-lock me-1"></i> Lupa password?</a>
                                     </div>
                                 </form>
+
+                                <div class="mt-3 text-center">
+                                    <div class="mt-4 text-center">
+                                        <p class="text-muted mb-3">Atau login dengan</p>
+                                        <div class="d-grid justify-content-center gap-2" > <!-- justify-content-center bisa dtambahkan/dihapus -->
+                                            <a href="{{ route('login.google') }}" class="btn btn-outline-primary hover-effect"> <!-- Mengganti btn btn-light border dengan btn btn-outline-primary hover-effect -->
+                                                <img src="{{ asset('./images/google.svg') }}" alt="Google" height="20" class="me-2">
+                                                Sign in with Google
+                                            </a>
+                                            <a href="" class="btn btn-outline-primary hover-effect">
+                                                <img src="{{ asset('./images/facebook.svg') }}" alt="Facebook" height="20" class="me-2">
+                                                Sign in with Facebook
+                                            </a>
+                                            <a href="{{ route('login.github') }}" class="btn btn-outline-primary hover-effect"> 
+                                                <img src="{{ asset('./images/GitHub_light.svg') }}" alt="GitHub" height="20" class="me-2">
+                                                Sign in with GitHub
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-
+                        </div>
+                        
+                        <div class="mt-1 text-center p-3">
+                            <p class="mb-1">Belum punya akun ? <a href="{{ route('register') }}" class="fw-medium text-primary"> Signup sekarang </a> </p>
+                            <p class="text-muted">© {{ date('Y') }} TechTutor Pro. Made with <i class="mdi mdi-heart text-danger"></i> by TechTutor Pro</p>
                         </div>
                     </div>
-                    <div class="mt-5 text-center">
-
-                        <div>
-                            <p>Belum punya akun ? <a href="{{ route('register') }}" class="fw-medium text-primary"> Signup sekarang </a> </p>
-                            <p>© {{ date('Y') }} TechTutor Pro. Made with <i class="mdi mdi-heart text-danger"></i> by TechTutor Pro</p>
-                        </div>
-                    </div>
-
                 </div>
             </div>
         </div>

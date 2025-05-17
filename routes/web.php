@@ -5,6 +5,7 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SocialiteController; //menambahkan socialitecontroller
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +35,17 @@ Route::prefix('email')->middleware('auth')->group(function () {
 });
 
 Route::get('/forgot-password', [App\Http\Controllers\Auth\ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
+
+    # API Google
+    Route::get('/login/google', [SocialiteController::class, 'redirectToGoogleLogin'])->name('login.google'); // Untuk login
+    Route::get('/register/google', [SocialiteController::class, 'redirectToGoogleRegister'])->name('register.google'); // Untuk register
+    Route::get('/login/google/callback', [SocialiteController::class, 'handleGoogleCallback']);
+
+    # API GitHub
+    Route::get('/login/github', [SocialiteController::class, 'redirectToGithubLogin'])->name('login.github'); // Untuk login
+    Route::get('/register/github', [SocialiteController::class, 'redirectToGithubRegister'])->name('register.github'); // Untuk register
+    Route::get('/login/github/callback', [SocialiteController::class, 'handleGithubCallback']);
+
 
 Auth::routes();
 
